@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-
-
 class ConvertingInput extends Component {
 
 

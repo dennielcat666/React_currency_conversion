@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import ConvertingInput from './ConvertingInput'
 import getCourse from './api'
 
-
-// const courseBuy = 75;
-// const courseSale = 76;
-
 function toUsd(rub, curentCourseBuy) {
 	return (rub / curentCourseBuy).toFixed(2);
 }
@@ -28,12 +24,10 @@ class ConvertingForm extends Component {
 	}
 
 	handleChangeUsd = (e) => {
-		// this.setState({usd: e.target.value, rub: toRub(e.target.value, courseSale)})
 		this.setState(prevState => ({...prevState, usd: e.target.value, rub: toRub(e.target.value, prevState.course)}))
 	}
 
 	handleChangeRub = (e) => {
-		// this.setState({rub: e.target.value, usd: toUsd(e.target.value, courseBuy)})
 		this.setState(prevState => ({...prevState, rub: e.target.value, usd: toUsd(e.target.value, prevState.course)}))
 	}
 
