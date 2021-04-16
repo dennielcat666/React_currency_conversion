@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ConvertingForm from './ConvertingForm'
-import ExchangeRates from './ExchangeRates'
+import ConvertingForm from './ConvertingForm/ConvertingForm'
+import ExchangeRates from './ExchangeRates/ExchangeRates'
 
 export default class App extends Component {
 	render(){

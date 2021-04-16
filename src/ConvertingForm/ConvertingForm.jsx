@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import ConvertingInput from './ConvertingInput'
-import getCourse from './api'
+import ConvertingInput from '../ConvertingInput/ConvertingInput'
+import getCourse from '../api'
+
+import styles from './ConvertingForm.module.css';
 
 function toUsd(rub, curentCourseBuy) {
 	return (rub / curentCourseBuy).toFixed(2);
@@ -33,10 +35,10 @@ class ConvertingForm extends Component {
 
 	render(){
 		return (
-			<div>
-				<span>USD</span>
+			<div className={styles.form}>
+				<span className={styles.text}>USD</span>
 				<ConvertingInput value={this.state.usd} onChange={this.handleChangeUsd}/>
-				<span>in RUB</span>
+				<span className={styles.text}>in RUB</span>
 				<ConvertingInput value={this.state.rub} onChange={this.handleChangeRub}/>
 			</div>
 		)
