@@ -14,14 +14,37 @@ const currencyNames = {
 	rub: "Российский рубль"
 }
 
+function calculate(currencyValues, baseCurrency) {
+	console.log('currencyValues', currencyValues);
+	const foo = Object.entries(currencyValues).reduce((acc, [key, value]) => {
+		if (key === baseCurrency) {
+			return {
+				...acc,
+				[key]: 1
+			}
+		}
+		console.log('currencyValues[baseCurrency]', currencyValues[baseCurrency], key, value);
+		console.log('acc', acc);
+		// 1base * курс рубля к базовой валюте / оставшиеся валюты
+		const res = currencyValues[baseCurrency] / value
+		return {
+			...acc,
+			[key]: res
+		}
+	}, {})
+	console.log("foo", foo);
+	return foo
+}
+
 class ExchangeRates extends Component{
 	state = {
+		baseCurrency: "rub",
 		currencyValues: {
-			usd: 0,
-			gbp: 0,
-			eur: 0,
-			byn: 0,
-			rub: 0
+			usd: 1,
+			gbp: 1,
+			eur: 1,
+			byn: 1,
+			rub: 1
 		}
 	}
 
@@ -37,7 +60,6 @@ class ExchangeRates extends Component{
 					} 
 					
 				})
-				console.log(this.state);
 				this.setState(
 					prevState => ({
 						...prevState,
@@ -47,18 +69,29 @@ class ExchangeRates extends Component{
 			})
 	}
 
+	handleClick = (e) => {
+		const newCurrencyValues = calculate(this.state.currencyValues, e.target.value)
+		this.setState(
+			prevState => ({
+				...prevState,
+				baseCurrency: e.target.value,
+				currencyValues: newCurrencyValues
+			})
+		)
+		
+	}
+
 	render(){
-		console.log(this.state);
 		return (
 			<div>
 				<div>
 					{Object.keys(this.state.currencyValues).map(item => (
-							<BaseCurrencyBtn key={item} value={item.toUpperCase()}/>	
+							<BaseCurrencyBtn key={item} value={item} onClick={this.handleClick}/>	
 						))}
 				</div>
 				<div className={styles.cardsBlock}>
 					{Object.entries(this.state.currencyValues).map(item => (
-						<CurrencyCard key={item[0]} name={currencyNames[item[0]]} shortName={item[0].toUpperCase()} value={item[1]}/>)
+						<CurrencyCard key={item[0]} name={currencyNames[item[0]]} shortName={item[0].toUpperCase()} value={item[1].toFixed(2)}/>)
 					)}
 				</div>
 			</div>
