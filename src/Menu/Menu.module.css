@@ -1,0 +1,18 @@
+.menuList {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+
+.menuItem{
+	color: black;
+	text-decoration: none;
+}
+
+.menuItem:active {
+	color: black;
+}
+
+.menuItem:hover {
+	color: green
+}

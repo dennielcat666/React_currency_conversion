@@ -70,6 +70,9 @@ class ExchangeRates extends Component{
 	}
 
 	handleClick = (e) => {
+		if (this.state.baseCurrency === e.target.value) {
+			return
+		}
 		const newCurrencyValues = calculate(this.state.currencyValues, e.target.value)
 		this.setState(
 			prevState => ({
